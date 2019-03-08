@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.micheal.actionlog.dao.log.UserActionLogDao">
+
+    <sql id="commonSQL">
+        <trim prefix="set" suffixOverrides=",">
+            <if test="recordId !=null and recordId !=''">recordId = #{recordId},</if>
+            <if test="effectedPrimeKey !=null and effectedPrimeKey !=''">effectedPrimeKey = #{effectedPrimeKey},</if>
+            <if test="tableName !=null and tableName !=''">tableName = #{tableName},</if>
+            <if test="columnName !=null and columnName !=''">columnName = #{columnName},</if>
+            <if test="originalValue !=null and originalValue !=''">originalValue = #{originalValue},</if>
+            <if test="modifiedValue !=null and modifiedValue !=''">modifiedValue = #{modifiedValue},</if>
+            <if test="userId !=null and userId !=''">userId = #{userId},</if>
+            <if test="SQLStatement !=null and SQLStatement !=''">SQLStatement = #{SQLStatement},</if>
+            <if test="description !=null and description !=''">description = #{description},</if>
+            <if test="methodName !=null and methodName !=''">methodName = #{methodName},</if>
+            <if test="effectedPrimeKeyName !=null and effectedPrimeKeyName !=''">effectedPrimeKeyName = #{effectedPrimeKeyName},</if>
+        </trim>
+    </sql>
+
+
+    <select id="selectById" resultType="com.micheal.actionlog.bean.log.UserActionLog" parameterType="string">
+      select * from user_action_log
+        <where>
+            id = #{id}
+        </where>
+    </select>
+
+
+    <select id="select" resultType="com.micheal.actionlog.bean.log.UserActionLog">
+        select * from user_action_log where 1=1
+        <if test="userid != null" >
+            and userid = #{userid}
+        </if>
+        <if test="startDate != null" >
+            and startDate <![CDATA[ >= ]]> #{startDate}
+        </if>
+        <if test="endDate != null" >
+            and endDate <![CDATA[ <= ]]> #{endDate}
+        </if>
+    </select>
+
+
+    <update id="update" parameterType="com.micheal.actionlog.bean.log.UserActionLog">
+        UPDATE user_action_log
+        <include refid="commonSQL"/>
+        WHERE id=#{id}
+    </update>
+
+    <delete id="delete" parameterType="com.micheal.actionlog.bean.log.UserActionLog">
+        delete from user_action_log where id=#{id}
+    </delete>
+
+    <insert id="insert" parameterType="com.micheal.actionlog.bean.log.UserActionLog">
+        insert into user_action_log
+        <include refid="commonSQL"/>
+    </insert>
+
+</mapper>

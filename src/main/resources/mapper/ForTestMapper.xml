@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.micheal.actionlog.dao.ForTestDao">
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id"  parameterType="com.micheal.actionlog.bean.ForTestBean">
+        INSERT INTO sku_data_permissions (deleteFlag) values (#{deleteFlag})
+    </insert>
+
+
+    <update id="update" parameterType="com.micheal.actionlog.bean.ForTestBean">
+        update sku_data_permissions
+        <set>
+            deleteFlag = #{deleteFlag}
+        </set>
+        WHERE id=#{id}
+    </update>
+
+
+
+
+</mapper>

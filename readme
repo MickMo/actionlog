@@ -1,0 +1,62 @@
+DB SQL:
+-- auto-generated definition
+create table user_action_log
+(
+  id                   int auto_increment
+  comment '主键'
+    primary key,
+  recordId             varchar(36)                         not null
+  comment '记录ID',
+  description          varchar(1000)                       not null
+  comment '业务描述',
+  methodName           varchar(500)                        null
+  comment '调用方法名',
+  userId               bigint                              not null
+  comment '用户ID',
+  effectedPrimeKeyName varchar(500)                        null
+  comment '被影响的数据表的主键字段名',
+  effectedPrimeKey     varchar(500)                        null
+  comment '被影响的数据表的主键ID',
+  tableName            varchar(100)                        null
+  comment '表名',
+  columnName           varchar(100)                        null
+  comment '字段名',
+  originalValue        varchar(1000)                       null
+  comment '修改前的值',
+  modifiedValue        varchar(1000)                       null
+  comment '修改后的值',
+  modifyDate           timestamp default CURRENT_TIMESTAMP not null
+  comment '修改时间',
+  SQLStatement         varchar(5000)                       not null
+  comment 'SQL',
+  constraint user_action_log_id_uindex
+  unique (id)
+);
+
+
+
+-- auto-generated definition
+create table sku_data_permissions
+(
+  ID           bigint             not null
+  comment 'ID'
+    primary key,
+  skuId        bigint             null
+  comment '用户ID',
+  rightsId     bigint             null
+  comment '权益ID',
+  status       int(1)             null
+  comment '状态（0-审核中,1-审核通过,2-审核不通过,3-取消）',
+  deleteFlag   int(1) default '0' not null
+  comment '是否删除 1-是 0-否',
+  createUserId bigint             null
+  comment '创建人',
+  createTime   datetime           null
+  comment '创建时间',
+  updateUserId bigint             null
+  comment '修改人',
+  updateTime   datetime           null
+  comment '修改时间'
+)
+  comment 'sku数据权限表';
+
