@@ -1,3 +1,6 @@
+DB Structure for Test is shown as follow:
+
+
 DB SQL:
 -- auto-generated definition
 create table user_action_log
